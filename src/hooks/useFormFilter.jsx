@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 export const useFormFilter = () => {
-	const [newFilter, setNewFilter] = useState("");
+  const [newFilter, setNewFilter] = useState("");
 
-    const handleNewFilterValue = (newValue) => {
-        setNewFilter(newValue);
-    }
+  const handleNewFilterValue = (newValue) => {
+    setNewFilter(newValue);
+  };
 
-    return {
-        newFilter,
-        handleNewFilterValue
-    };
-}
+  return {
+    newFilter,
+    handleNewFilterValue,
+  };
+};
