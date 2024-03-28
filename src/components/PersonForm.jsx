@@ -1,34 +1,23 @@
+import { usePersons } from '../hooks';
 export const PersonForm = ({ newName, setNewName, newNumber, handleNewNumber, persons, setPersons }) => {
-
+    const { handleUpdatePerson } = usePersons();
+    const { createPerson } = usePersons();
     const addNewPerson = (event) => {
-		event.preventDefault();
+        event.preventDefault();
 		if (!persons.some(person => (person.name === newName))) {
 			const newPerson = {
-				id: Date.now(),
+				id: Date.now().toString(),
 				name: newName,
 				number: newNumber
 			}
-			setPersons([...persons, newPerson])
-            fetch('http://localhost:3001/persons', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    id: Date.now(),
-                    name: newName,
-                    number: newNumber
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+            createPerson(newPerson);
+			setPersons([...persons, newPerson]);
+
 		} else {
-			alert(`${newName} is already added to the phonebook`)
+            const existingPerson = persons.find(person => person.name === newName);
+			if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+                handleUpdatePerson(existingPerson.id, newNumber, existingPerson.newName);
+            }
 		}
 	};
 
