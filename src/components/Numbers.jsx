@@ -1,6 +1,6 @@
 import { DeleteButton } from "./DeleteButton";
 
-export const Numbers = ({ persons, newFilter }) => {
+export const Numbers = ({ persons, newFilter, handleChangePersonsValue }) => {
   return (
     <div>
       <h2>Numbers</h2>
@@ -10,7 +10,7 @@ export const Numbers = ({ persons, newFilter }) => {
           .map((person, i) => (
             <li key={i}>
               {person.name} {person.number}
-              <DeleteButton id={person.id} />
+              <DeleteButton id={person.id} name={person.name} persons={persons} handleChangePersonsValue={handleChangePersonsValue}  />
             </li>
           ))}
       </ul>

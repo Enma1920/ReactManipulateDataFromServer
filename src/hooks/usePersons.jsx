@@ -16,13 +16,6 @@ export const usePersons = () => {
   const createPerson = (newPerson) => {
     personService.create(newPerson);
   };
-  const handleDeletePerson = (id) => {
-    personService.deletePerson(id).then(() => {
-      personService.getPersons().then((data) => {
-        handleChangePersonsValue(data);
-      });
-    });
-  };
 
   const handleUpdatePerson = (id, newNumber, name) => {
     const personExists = persons.some((person) => person.id === id);
@@ -44,6 +37,13 @@ export const usePersons = () => {
             console.log(error);
           });
       }
+    }
+  };
+  const handleDeletePerson = async(id, name, persons, handlleChangePersonsValue)=>{
+    if(window.confirm(`Delete ${name}?`)){
+        await personService.deletePerson(id);
+        handlleChangePersonsValue(persons.filter(person=>person.id !== id));
+        alert(`Person ${name} has been deleted`)
     }
   };
 

@@ -19,7 +19,7 @@ const App = () => {
         persons={persons}
         setPersons={handleChangePersonsValue}
       />
-      <Numbers newFilter={newFilter} persons={persons} />
+      <Numbers newFilter={newFilter} persons={persons} handleChangePersonsValue={handleChangePersonsValue} />
     </div>
   );
 };
